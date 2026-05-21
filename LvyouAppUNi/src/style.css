@@ -1,0 +1,190 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* 全局层级规范 */
+  --z-header: 100;
+  --z-dropdown: 1000;
+  --z-overlay: 1100;
+  --z-modal: 1200;
+  --z-toast: 1300;
+  --z-tooltip: 1400;
+  --nav-height: 46px;
+  --tabbar-height: 50px;
+  /* 页面布局规范 */
+  --page-bg: #f5f5f5;
+  --page-padding: 12px;
+  --page-padding-lg: 16px;
+  --section-radius: 8px;
+  --content-bottom-tabbar: 70px;
+  --content-bottom-safe: 24px;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* 打开弹窗时禁止背景滚动 */
+body.modal-open {
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card {
+  padding: 2em;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0rem;
+  text-align: left;
+}
+
+/* 吸顶头部与内容偏移（如有使用粘性头部时应用 .has-sticky-header 到容器） */
+.has-sticky-header {
+  padding-top: var(--nav-height);
+}
+
+/* 通用浮层与遮罩（给自定义弹层/下拉/日历使用） */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: var(--z-overlay);
+}
+
+.popup,
+.modal,
+.drawer,
+.dropdown-menu,
+.popover {
+  position: fixed;
+  z-index: var(--z-modal);
+  background: #fff;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: inherit;
+}
+
+/* Vant 顶部导航栏固定时的层级，确保不被内容遮挡 */
+.van-nav-bar--fixed {
+  z-index: var(--z-header) !important;
+}
+
+/* 固定导航栏占位，避免内容被覆盖 */
+.nav-spacer {
+  height: var(--nav-height);
+  flex-shrink: 0;
+}
+
+/* 带底部 Tab 的页面容器：保证内容不被 tabbar 遮挡 */
+.page-with-tabbar {
+  min-height: 100vh;
+  padding-bottom: var(--content-bottom-tabbar);
+  background-color: var(--page-bg);
+  box-sizing: border-box;
+}
+
+/* 仅顶部导航的页面容器：底部留安全间距 */
+.page-nav-only {
+  min-height: 100vh;
+  padding-bottom: var(--content-bottom-safe);
+  background-color: var(--page-bg);
+  box-sizing: border-box;
+}
+
+/* 页面主内容区：统一左右边距 */
+.page-content {
+  padding-left: var(--page-padding-lg);
+  padding-right: var(--page-padding-lg);
+  box-sizing: border-box;
+}
+
+/* 兜底：确保van组件的浮层也在我们的层级之上（如使用Vant） */
+.van-overlay { z-index: var(--z-overlay) !important; }
+.van-popup { z-index: var(--z-modal) !important; }
+.van-toast { z-index: var(--z-toast) !important; }
+.van-popover { z-index: var(--z-tooltip) !important; }
+
+/* 页面右下角固定创建按钮，避免遮挡底部 Tab 的“我的”按钮 */
+.fixed-create-fab {
+  position: fixed;
+  right: 16px;
+  bottom: calc(var(--tabbar-height) + 30px + env(safe-area-inset-bottom, 0px));
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1989fa;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(25, 137, 250, 0.28);
+  z-index: 200;
+}
+
+.fixed-create-fab .van-icon {
+  font-size: 24px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
